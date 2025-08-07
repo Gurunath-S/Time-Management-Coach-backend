@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      Int    @id @default(autoincrement())
+  name    String
+  email   String @unique
+  picture String @db.LongText
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  created_at  DateTime @default(now())
+  due_date    DateTime 
+  priority    String
+  note        String?
+  reason      String?
+  status      String
+  assigned_to String
+  priority_tags  Json?
+  
+  @@map("tasks")
+}
+
+model Qtask {
+  id                String   @id @default(uuid())
+  date              DateTime 
+  workTasks         String
+  personalTasks     String
+  assigned_by       String
+  notes             String
+  timeSpent         String
+  @@map("Qtask")
+}
