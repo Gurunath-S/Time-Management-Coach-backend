@@ -19,7 +19,7 @@ model Task {
   id          String   @id @default(uuid())
   title       String
   created_at  DateTime @default(now())
-  due_date    DateTime 
+  due_date    DateTime?
   priority    String
   note        String?
   reason      String?
