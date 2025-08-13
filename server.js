@@ -1,202 +1,3 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const jwt = require('jsonwebtoken');
-// const cors = require('cors');
-// const { OAuth2Client } = require('google-auth-library');
-// require('dotenv').config();
-
-// const app = express();
-// const PORT = process.env.PORT || 5000;
-
-// // Middlewares
-// app.use(cors());
-// app.use(express.json());
-
-// // Google OAuth client
-// const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-// // MongoDB connection
-// mongoose.connect(process.env.MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log('MongoDB connected'))
-// .catch((err) => console.error('MongoDB connection error:', err));
-
-// // User schema and model
-// const userSchema = new mongoose.Schema({
-//   name: String,
-//   email: { type: String, unique: true },
-//   picture: String,
-// });
-// const User = mongoose.model('User', userSchema);
-
-// // Google Login Route
-// app.post('/api/auth/google-login', async (req, res) => {
-//   const { credential } = req.body;
-
-//   try {
-//     const ticket = await client.verifyIdToken({
-//       idToken: credential,
-//       audience: process.env.GOOGLE_CLIENT_ID,
-//     });
-
-//     const payload = ticket.getPayload();
-//     const { name, email, picture } = payload;
-
-//     let user = await User.findOne({ email });
-
-//     if (!user) {
-//       user = await User.create({ name, email, picture });
-//       console.log('New user saved:', user);
-//     }
-
-//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-//     res.status(200).json({ token });
-//   } catch (err) {
-//     console.error('Google Login Error:', err);
-//     res.status(500).json({ message: 'Login failed' });
-//   }
-// });
-
-// // Profile Route (Protected)
-// app.get('/api/profile', async (req, res) => {
-//   const authHeader = req.headers.authorization;
-
-//   if (!authHeader) return res.status(401).json({ message: 'Missing token' });
-
-//   const token = authHeader.split(' ')[1];
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     const user = await User.findById(decoded.id).select('-__v');
-
-//     if (!user) return res.status(404).json({ message: 'User not found' });
-
-//     res.status(200).json({ user });
-//   } catch (err) {
-//     console.error('Auth Error:', err);
-//     res.status(401).json({ message: 'Invalid token' });
-//   }
-// });
-
-// // Start server
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
-
-
-// // raw code with quries 
-// const express = require('express');
-// const mariadb = require('mariadb');
-// const jwt = require('jsonwebtoken');
-// const cors = require('cors');
-// const { OAuth2Client } = require('google-auth-library');
-// require('dotenv').config();
-
-// const app = express();
-// const PORT = process.env.PORT || 5000;
-
-// app.use(cors());
-// app.use(express.json());
-
-// // Google OAuth client
-// const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-// // MariaDB pool
-// const pool = mariadb.createPool({
-//   host: 'localhost',
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   database: process.env.DB_NAME,
-//   connectionLimit: 5,
-// });
-
-// app.post('/api/auth/google-login', async (req, res) => {
-//   const { credential } = req.body;
-
-//   try {
-//     const ticket = await client.verifyIdToken({
-//       idToken: credential,
-//       audience: process.env.GOOGLE_CLIENT_ID,
-//     });
-
-//     const payload = ticket.getPayload();
-//     const { name, email, picture } = payload;
-
-//     let conn;
-//     try {
-//       conn = await pool.getConnection();
-
-//       // Check if user exists
-//       const users = await conn.query('SELECT * FROM users WHERE email = ?', [email]);
-//       let user = users[0];
-
-//       if (!user) {
-//         const insertResult = await conn.query(
-//           'INSERT INTO users (name, email, picture) VALUES (?, ?, ?)',
-//           [name, email, picture]
-//         );
-
-//         user = {
-//           id: insertResult.insertId,
-//           name,
-//           email,
-//           picture,
-//         };
-
-//         console.log('New user saved:', user);
-//       }
-
-//       const token = jwt.sign({ id: Number(user.id) }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-//       res.status(200).json({ token });
-//     } finally {
-//       if (conn) conn.release();
-//     }
-//   } catch (err) {
-//     console.error('Google Login Error:', err);
-//     console.error('DB Error:', err);
-//     res.status(500).json({ message: 'Login failed' });
-//   }
-// });
-
-
-// app.get('/api/profile', async (req, res) => {
-//   const authHeader = req.headers.authorization;
-
-//   if (!authHeader) return res.status(401).json({ message: 'Missing token' });
-
-//   const token = authHeader.split(' ')[1];
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     let conn;
-//     try {
-//       conn = await pool.getConnection();
-
-//       const users = await conn.query('SELECT id, name, email, picture FROM users WHERE id = ?', [decoded.id]);
-//       const user = users[0];
-
-//       if (!user) return res.status(404).json({ message: 'User not found' });
-
-//       res.status(200).json({ user });
-//     } finally {
-//       if (conn) conn.release();
-//     }
-//   } catch (err) {
-//     console.error('Auth Error:', err);
-//     res.status(401).json({ message: 'Invalid token' });
-//   }
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
-
-//new code with the prisma 
-
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
@@ -251,7 +52,7 @@ app.post('/api/auth/google-login', async (req, res) => {
       console.log('New user saved with base64 image');
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '31d' });
     res.status(200).json({ token });
 
   } catch (err) {
@@ -354,6 +155,21 @@ app.put('/api/tasks/:id', async (req, res) => {
   } catch (err) {
     console.error('Error updating task:', err);
     res.status(500).json({ message: 'Failed to update task' });
+  }
+});
+
+app.get('/api/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const task = await prisma.task.findUnique({
+      where: { id: id }
+    });
+    if (!task) return res.status(404).json({ message: 'Task not found' });
+    res.status(200).json(task);
+  } catch (err) {       
+    console.error('Error fetching task:', err);
+    res.status(500).json({ message: 'Failed to fetch task' });
   }
 });
 
