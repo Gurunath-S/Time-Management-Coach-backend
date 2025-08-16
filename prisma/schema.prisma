@@ -13,19 +13,24 @@ model User {
   name    String
   email   String @unique
   picture String @db.LongText
+  tasks   Task[]
+  qtasks  Qtask[]
 }
 
 model Task {
-  id          String   @id @default(uuid())
-  title       String
-  created_at  DateTime @default(now())
-  due_date    DateTime?
-  priority    String
-  note        String?
-  reason      String?
-  status      String
-  assigned_to String
-  priority_tags  Json?
+  id                String   @id @default(uuid())
+  title             String
+  created_at        DateTime @default(now())
+  due_date          DateTime?
+  priority          String
+  note              String?
+  reason            String?
+  status            String
+  assigned_to       String
+  priority_tags     Json?
+
+  userId            Int    
+  user              User     @relation(fields: [userId], references: [id])
   
   @@map("tasks")
 }
@@ -38,5 +43,10 @@ model Qtask {
   assigned_by       String
   notes             String
   timeSpent         String
+
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
   @@map("Qtask")
 }
