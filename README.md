@@ -9,9 +9,6 @@ A robust backend service for the **Time Management Coach** application, built wi
 - ✅ **Quick Tasks** logging for unplanned interruptions
 - ✅ **Focus Mode** sessions tracking with analytics
 - ✅ **Priority Tags Editor** for advanced task classification
-- ✅ **RESTful API** design with proper error handling
-- ✅ **Clean modular architecture** for scalability
-- ✅ **Database migrations** and seeding support
 
 ## 🛠️ Tech Stack
 
@@ -23,47 +20,11 @@ A robust backend service for the **Time Management Coach** application, built wi
 | **MariaDB** | Primary database |
 | **JWT** | Authentication and authorization |
 | **bcryptjs** | Password hashing |
-| **Google OAuth2** | Third-party authentication |
+| **Google OAuth2** | authentication |
 
 ## 📂 Project Structure
 
-```
-Time-Management-Coach-backend/
-├── controllers/           # Request handlers and business logic
-│   ├── authController.js
-│   ├── taskController.js
-│   ├── focusController.js
-│   └── tagController.js
-├── routes/               # API route definitions
-│   ├── auth.js
-│   ├── tasks.js
-│   ├── focus.js
-│   └── tags.js
-├── middleware/           # Authentication and validation middleware
-│   ├── auth.js
-│   └── validation.js
-├── prisma/              # Database schema and migrations
-│   ├── schema.prisma
-│   └── migrations/
-├── config/              # Configuration files
-│   └── database.js
-├── utils/               # Helper functions and utilities
-│   ├── jwt.js
-│   └── responses.js
-├── server.js            # Main server entry point
-├── package.json         # Dependencies and scripts
-└── .env.example         # Environment variables template
-```
-
 ## ⚡ Quick Start
-
-### Prerequisites
-
-- **Node.js** (v16 or higher)
-- **npm** or **yarn**
-- **MariaDB** (v10.4 or higher)
-- **Git**
-
 ### 1️⃣ Clone the Repository
 
 ```bash
@@ -125,51 +86,3 @@ npm start
 ```
 
 The server will be running at `http://localhost:5000`
-
-## 📋 API Documentation
-
-### Authentication Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/auth/register` | User registration |
-| `POST` | `/api/auth/login` | User login |
-| `POST` | `/api/auth/google` | Google OAuth login |
-| `GET` | `/api/auth/profile` | Get user profile |
-
-### Task Management
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/tasks` | Get all user tasks |
-| `POST` | `/api/tasks` | Create new task |
-| `GET` | `/api/tasks/:id` | Get task by ID |
-| `PUT` | `/api/tasks/:id` | Update task |
-| `DELETE` | `/api/tasks/:id` | Delete task |
-
-### Quick Tasks
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/quick-tasks` | Get quick tasks log |
-| `POST` | `/api/quick-tasks` | Log new quick task |
-| `GET` | `/api/quick-tasks/analytics` | Quick tasks analytics |
-
-### Focus Sessions
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/focus` | Get focus sessions |
-| `POST` | `/api/focus/start` | Start focus session |
-| `PUT` | `/api/focus/:id/end` | End focus session |
-| `GET` | `/api/focus/stats` | Focus session statistics |
-
-### Priority Tags
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/tags` | Get all priority tags |
-| `POST` | `/api/tags` | Create new tag |
-| `PUT` | `/api/tags/:id` | Update tag |
-| `DELETE` | `/api/tags/:id` | Delete tag |
-
