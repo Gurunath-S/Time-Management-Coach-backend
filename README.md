@@ -45,14 +45,10 @@ Create a `.env` file in the root directory:
 ```env
 # Database Configuration
 DATABASE_URL="mysql://username:password@localhost:3306/time_management_db"
-
 # JWT Configuration
 JWT_SECRET=your_super_secret_jwt_key_here
-JWT_EXPIRES_IN=7d
-
 # Google OAuth Configuration
 GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 # Server Configuration
 PORT=5000
@@ -70,18 +66,17 @@ npx prisma generate
 
 # Run database migrations
 npx prisma migrate dev
-
-# (Optional) Seed the database with sample data
-npx prisma db seed
+# Or
+npx prisma migrate dev
 ```
 
-### 5️⃣ Start the Server
-
+### 5️⃣ Start Commands
 ```bash
-# Development mode with hot reload
+# Frontend
 npm run dev
-
-# Production mode
+```
+```bash
+# Backend
 npm start
 ```
 
