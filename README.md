@@ -61,7 +61,7 @@ PORT=5000
 npx prisma generate
 
 # Run database migrations
-npx prisma migrate dev
+npx prisma db push
 # Or
 npx prisma migrate dev
 ```
