@@ -20,5 +20,5 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/qtasks', qtaskRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running successfully``);
 });
