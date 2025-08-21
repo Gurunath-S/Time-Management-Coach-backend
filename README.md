@@ -29,6 +29,7 @@ A robust backend service for the **Time Management Coach** application, built wi
 
 ```bash
 git clone https://github.com/Gurunath-S/Time-Management-Coach-backend.git
+
 cd Time-Management-Coach-backend
 ```
 
@@ -49,13 +50,8 @@ DATABASE_URL="mysql://username:password@localhost:3306/time_management_db"
 JWT_SECRET=your_super_secret_jwt_key_here
 # Google OAuth Configuration
 GOOGLE_CLIENT_ID=your_google_client_id
-
 # Server Configuration
 PORT=5000
-NODE_ENV=development
-
-# CORS Configuration
-FRONTEND_URL=http://localhost:3000
 ```
 
 ### 4️⃣ Database Setup
