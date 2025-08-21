@@ -22,9 +22,8 @@ A robust backend service for the **Time Management Coach** application, built wi
 | **bcryptjs** | Password hashing |
 | **Google OAuth2** | authentication |
 
-## 📂 Project Structure
-
 ## ⚡ Quick Start
+
 ### 1️⃣ Clone the Repository
 
 ```bash
